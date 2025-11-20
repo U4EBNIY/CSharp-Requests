@@ -14,8 +14,7 @@ namespace MozaikaApp
         public MainWindow()
         {
             InitializeComponent();
-
-            // Событие двойного клика
+            
             listPartner.MouseDoubleClick += ListPartner_MouseDoubleClick;
         }
 
@@ -46,7 +45,7 @@ namespace MozaikaApp
                     Margin = new Thickness(0, 10, 0, 10),
                     Padding = new Thickness(10),
                     Tag = order.id,
-                    Background = Brushes.White // Белый фон вместо аквамаринового
+                    Background = Brushes.White
                 };
 
                 Button btnOrderItems = new Button
@@ -66,19 +65,16 @@ namespace MozaikaApp
 
                 gr.Width = 645;
 
-                // Верхняя строка: Тип | Наименование партнера
+                // Верхняя строка
                 typeAndName.Text = $"{partner?.type ?? "Тип не указан"} | {partner?.name ?? "Наименование не указано"}";
                 typeAndName.FontSize = 16;
                 typeAndName.VerticalAlignment = VerticalAlignment.Center;
-                // Убрал FontWeight = FontWeights.Bold;
 
                 // Стоимость справа
                 totalAmount.Text = $"{order.total_amount:F2} руб.";
                 totalAmount.FontSize = 16;
                 totalAmount.VerticalAlignment = VerticalAlignment.Center;
-                totalAmount.HorizontalAlignment = HorizontalAlignment.Right; // Выравнивание по правому краю
-                                                                             // Убрал FontWeight = FontWeights.Bold;
-                                                                             // Убрал цветной Foreground
+                totalAmount.HorizontalAlignment = HorizontalAlignment.Right;                                                       
 
                 // Детальная информация
                 address.Text = $"Юридический адрес: {partner?.sellingPlaces ?? "Не указан"}";
@@ -98,12 +94,12 @@ namespace MozaikaApp
                 for (int r = 0; r < 5; r++)
                     gr.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
-                gr.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }); // Первая колонка растягивается
-                gr.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Вторая колонка по содержимому
+                gr.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                gr.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); 
 
                 // Размещение элементов
                 Grid.SetColumn(typeAndName, 0); Grid.SetRow(typeAndName, 0);
-                Grid.SetColumn(totalAmount, 1); Grid.SetRow(totalAmount, 0); // Стоимость во второй колонке справа
+                Grid.SetColumn(totalAmount, 1); Grid.SetRow(totalAmount, 0); 
 
                 Grid.SetColumn(address, 0); Grid.SetRow(address, 1); Grid.SetColumnSpan(address, 2);
                 Grid.SetColumn(phone, 0); Grid.SetRow(phone, 2); Grid.SetColumnSpan(phone, 2);
@@ -126,7 +122,6 @@ namespace MozaikaApp
         {
             if (sender is Button btn && btn.Tag is int orderId)
             {
-                // Для просмотра продукции не закрываем главное окно (модальное)
                 OrderItemsWindow win = new OrderItemsWindow(orderId);
                 win.ShowDialog();
             }
@@ -136,26 +131,21 @@ namespace MozaikaApp
         {
             if (listPartner.SelectedItem is Border border && border.Tag is int orderId)
             {
-                // Закрываем главное окно и открываем окно редактирования
                 EditOrderWindow editWindow = new EditOrderWindow(orderId);
                 editWindow.Show();
-                this.Close(); // Закрываем главное окно
+                this.Close();
             }
         }
 
         private void addOrder_Click(object sender, RoutedEventArgs e)
         {
-            // Закрываем главное окно и открываем окно добавления
             EditOrderWindow editWindow = new EditOrderWindow();
             editWindow.Show();
-            this.Close(); // Закрываем главное окно
+            this.Close();
         }
-
-
-        // Добавляем метод для загрузки заявок (если его нет)
+        
         private void LoadOrders()
         {
-            // Ваш код загрузки заявок из showOrders_Click
             showOrders_Click(null, null);
         }
     }
