@@ -25,7 +25,7 @@ namespace MozaikaApp
         public EditOrderWindow()
         {
             InitializeComponent();
-            db = new MozaikaEntities(); // Создаем новый контекст
+            db = new MozaikaEntities();
             LoadProducts();
         }
 
@@ -45,8 +45,7 @@ namespace MozaikaApp
         {
             try
             {
-                // Убираем фильтр по is_active, так как этого поля нет в БД
-                var products = db.product.ToList(); // Просто загружаем все продукты
+                var products = db.product.ToList(); 
                 cmbProduct.ItemsSource = products;
                 cmbProduct.DisplayMemberPath = "name";
                 cmbProduct.SelectedValuePath = "id";
@@ -123,7 +122,6 @@ namespace MozaikaApp
             decimal unitPrice = selectedProduct.minCostForPartner ?? 0;
             decimal totalPrice = unitPrice * quantity;
 
-            // Проверяем, нет ли уже этой продукции в заявке
             var existingItem = orderItems.FirstOrDefault(oi => oi.ProductId == selectedProduct.id);
             if (existingItem != null)
             {
@@ -144,8 +142,7 @@ namespace MozaikaApp
 
             RefreshOrderItemsList();
             UpdateTotalAmount();
-
-            // Сбрасываем выбор
+            
             cmbProduct.SelectedIndex = -1;
             txtQuantity.Text = "1";
         }
@@ -204,7 +201,7 @@ namespace MozaikaApp
 
             try
             {
-                using (var db = new MozaikaEntities()) // Создаем новый контекст
+                using (var db = new MozaikaEntities())
                 {
                     partner partnerEntity;
                     partner_order orderEntity;
@@ -254,10 +251,10 @@ namespace MozaikaApp
                             telNumber = txtPhone.Text ?? "",
                             email = txtEmail.Text ?? "",
                             inn = "0000000000",
-                            logo = null // Разрешаем NULL
+                            logo = null 
                         };
                         db.partner.Add(partnerEntity);
-                        db.SaveChanges(); // Сохраняем чтобы получить ID
+                        db.SaveChanges(); 
 
                         // Создание новой заявки
                         orderEntity = new partner_order
@@ -271,7 +268,7 @@ namespace MozaikaApp
                         db.partner_order.Add(orderEntity);
                     }
 
-                    db.SaveChanges(); // Сохраняем заявку чтобы получить ID
+                    db.SaveChanges();
 
                     // Добавляем позиции заявки
                     foreach (var item in orderItems)
@@ -295,7 +292,6 @@ namespace MozaikaApp
                     MessageBox.Show("Заявка успешно сохранена!", "Успех",
                         MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Закрываем это окно и открываем обновленное главное окно
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                     this.Close();
@@ -303,7 +299,7 @@ namespace MozaikaApp
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
-                // Обработка ошибок валидации Entity Framework
+                // Обработка ошибок
                 var errorMessages = new List<string>();
                 foreach (var validationResult in ex.EntityValidationErrors)
                 {
@@ -317,7 +313,7 @@ namespace MozaikaApp
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
             {
-                // Обработка ошибок обновления БД
+                // Обработка ошибок
                 string errorMessage = $"Ошибка обновления БД: {ex.Message}";
                 if (ex.InnerException != null)
                 {
@@ -360,7 +356,6 @@ namespace MozaikaApp
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            // Закрываем это окно и открываем главное окно
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
@@ -368,7 +363,6 @@ namespace MozaikaApp
 
         private void Calculator_Click(object sender, RoutedEventArgs e)
         {
-            // Для калькулятора не закрываем окно редактирования (модальное)
             int? materialId = null;
             if (cmbProduct.SelectedItem is product selectedProduct)
             {
