@@ -1,0 +1,20 @@
+﻿<Window x:Class="MozaikaApp.MaterialSuppliersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Поставщики материала" Height="400" Width="520"
+        Icon="Images/Icon.ico">
+    <Grid>
+        <TextBlock Text="Поставщики материала" FontFamily="Comic Sans MS" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+        <ListView x:Name="listSuppliers" Margin="11,50,11,50" Background="#FFABCFCE" FontFamily="Comic Sans MS">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Name}" Width="200"/>
+                    <GridViewColumn Header="Рейтинг" DisplayMemberBinding="{Binding Rating}" Width="100"/>
+                    <GridViewColumn Header="Дата начала работы" DisplayMemberBinding="{Binding StartDate}" Width="150"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Назад" Click="Back_Click" FontFamily="Comic Sans MS" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,106,10" Width="142" Background="#FF546F94"/>
+        <Button Content="Расчитать продукцию" Click="OpenMaterialSuppliers_Click" FontFamily="Comic Sans MS" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,260,10" Width="150" Background="#FF546F94"/>
+    </Grid>
+</Window>

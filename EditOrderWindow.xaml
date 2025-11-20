@@ -1,0 +1,129 @@
+﻿<Window x:Class="MozaikaApp.EditOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MozaikaApp"
+        mc:Ignorable="d"
+        Icon="Images/Icon.ico"
+        Title="Добавление/редактирование заявки" Height="800" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Информация о партнере -->
+        <GroupBox Grid.Row="0" Header="Информация о партнере" FontFamily="Comic Sans MS" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="5">
+                    <TextBlock Text="Тип партнера:" FontFamily="Comic Sans MS" Margin="0,5,0,0"/>
+                    <ComboBox x:Name="cmbPartnerType" FontFamily="Comic Sans MS" Margin="0,5" 
+                              Background="#FFABCFCE">
+                        <ComboBoxItem Content="Дистрибьютор"/>
+                        <ComboBoxItem Content="Розничный партнер"/>
+                        <ComboBoxItem Content="Оптовый покупатель"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Наименование:" FontFamily="Comic Sans MS" Margin="0,5,0,0"/>
+                    <TextBox x:Name="txtName" FontFamily="Comic Sans MS" Margin="0,5" Background="#FFABCFCE"/>
+
+                    <TextBlock Text="ФИО директора:" FontFamily="Comic Sans MS" Margin="0,5,0,0"/>
+                    <TextBox x:Name="txtDirector" FontFamily="Comic Sans MS" Margin="0,5" Background="#FFABCFCE"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="5">
+                    <TextBlock Text="Адрес:" FontFamily="Comic Sans MS" Margin="0,5,0,0"/>
+                    <TextBox x:Name="txtAddress" FontFamily="Comic Sans MS" Margin="0,5" Background="#FFABCFCE"/>
+
+                    <TextBlock Text="Рейтинг:" FontFamily="Comic Sans MS" Margin="0,5,0,0"/>
+                    <TextBox x:Name="txtRating" FontFamily="Comic Sans MS" Margin="0,5" Background="#FFABCFCE"/>
+
+                    <TextBlock Text="Телефон:" FontFamily="Comic Sans MS" Margin="0,5,0,0"/>
+                    <TextBox x:Name="txtPhone" FontFamily="Comic Sans MS" Margin="0,5" Background="#FFABCFCE"/>
+
+                    <TextBlock Text="Email:" FontFamily="Comic Sans MS" Margin="0,5,0,0"/>
+                    <TextBox x:Name="txtEmail" FontFamily="Comic Sans MS" Margin="0,5" Background="#FFABCFCE"
+         TextChanged="Email_TextChanged"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <!-- В GroupBox с продукцией добавляем кнопку калькулятора -->
+        <GroupBox Grid.Row="1" Header="Продукция в заявке" FontFamily="Comic Sans MS" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="5">
+                    <TextBlock Text="Продукция:" FontFamily="Comic Sans MS" Margin="0,5,0,0"/>
+                    <ComboBox x:Name="cmbProduct" DisplayMemberPath="name" 
+                      FontFamily="Comic Sans MS" Margin="0,5" Background="#FFABCFCE"/>
+
+                    <TextBlock Text="Количество:" FontFamily="Comic Sans MS" Margin="0,5,0,0"/>
+                    <TextBox x:Name="txtQuantity" FontFamily="Comic Sans MS" Margin="0,5" Background="#FFABCFCE" Text="1"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="5">
+                    <Button Content="Добавить продукцию" Click="AddProduct_Click" 
+                    FontFamily="Comic Sans MS" Background="#FF546F94" Foreground="White"
+                    Width="150" Height="30" Margin="0,5"/>
+                    <Button Content="Калькулятор материала" Click="Calculator_Click" 
+                    FontFamily="Comic Sans MS" Background="#FF546F94" Foreground="White"
+                    Width="150" Height="30" Margin="0,5"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <!-- Список добавленной продукции -->
+        <GroupBox Grid.Row="2" Header="Добавленная продукция" FontFamily="Comic Sans MS" Margin="5">
+            <ListView x:Name="lstOrderItems" FontFamily="Comic Sans MS" Background="#FFABCFCE">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Продукция" Width="200" DisplayMemberBinding="{Binding ProductName}"/>
+                        <GridViewColumn Header="Количество" Width="100" DisplayMemberBinding="{Binding Quantity}"/>
+                        <GridViewColumn Header="Цена за ед." Width="120" DisplayMemberBinding="{Binding UnitPrice, StringFormat={}{0:F2} руб.}"/>
+                        <GridViewColumn Header="Стоимость" Width="120" DisplayMemberBinding="{Binding TotalPrice, StringFormat={}{0:F2} руб.}"/>
+                        <GridViewColumn Header="Действия" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Удалить" Click="RemoveProduct_Click" 
+                                            Tag="{Binding ProductId}"
+                                            FontFamily="Comic Sans MS" 
+                                            Background="#FF546F94" Foreground="White"
+                                            Width="80" Height="25"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+
+        <!-- Итоговая стоимость -->
+        <Border Grid.Row="3" Background="#FFABCFCE" Margin="5" Padding="10" BorderThickness="1" BorderBrush="Black">
+            <TextBlock x:Name="txtOrderTotal" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold"
+                       Text="Итоговая стоимость: 0.00 руб."/>
+        </Border>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <Button Content="Сохранить" Click="Save_Click" 
+                    FontFamily="Comic Sans MS" Background="#FF546F94" Foreground="White"
+                    Width="120" Height="35" Margin="10,5"/>
+            <Button Content="Назад" Click="Cancel_Click" 
+                    FontFamily="Comic Sans MS" Background="#FF546F94" Foreground="White"
+                    Width="120" Height="35" Margin="10,5"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,28 @@
+﻿<Window x:Class="MozaikaApp.AddMaterialPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MozaikaApp"
+        mc:Ignorable="d"
+        Icon="Images/Icon.ico"
+        Title="Доб-ие и ред-ие материала" Height="333" Width="400">
+    <Grid Margin="0,0,0,33">
+        <Button Content="Сохранить" Click="Save_Click" FontFamily="Comic Sans MS" Margin="117,226,183,-15" Background="#FF546F94"/>
+        <Button Content="Назад" Click="Cancel_Click" FontFamily="Comic Sans MS" Margin="222,226,78,-15" Background="#FF546F94"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Название:" FontFamily="Comic Sans MS" VerticalAlignment="Top" Margin="11,11,259,0"/>
+        <TextBlock Grid.Column="0" Text="Цена:" FontFamily="Comic Sans MS" VerticalAlignment="Top" Margin="11,112,259,0"/>
+        <TextBox x:Name="txtName" Grid.Row="0" Margin="150,10,20,225" Background="#FFABCFCE" />
+        <ComboBox x:Name="cmbType" Margin="150,47,20,191" FontFamily="Comic Sans MS" DisplayMemberPath="name"  SelectedValuePath="id" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Тип:" FontFamily="Comic Sans MS" VerticalAlignment="Top" Margin="11,43,259,0"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Comic Sans MS" Text="Количество на складе:" VerticalAlignment="Top" Margin="11,77,259,0"/>
+        <TextBox x:Name="txtStashAmount" Grid.Row="0" Margin="150,80,20,155" Background="#FFABCFCE" />
+        <TextBlock Grid.Column="0" Text="Единица измерения:" FontFamily="Comic Sans MS" VerticalAlignment="Top" Margin="10,145,260,0"/>
+        <TextBox x:Name="txtPrice" Grid.Row="0" Margin="150,112,20,127" Background="#FFABCFCE" />
+        <TextBox x:Name="txtMeasurement" Grid.Row="0" Margin="150,141,20,94" Background="#FFABCFCE" />
+        <TextBox x:Name="txtMinStashAmount" Grid.Row="0" Margin="150,172,20,63" Background="#FFABCFCE" />
+        <TextBlock Grid.Column="0" Text="Мин. количество" FontFamily="Comic Sans MS" VerticalAlignment="Top" Margin="10,177,242,0"/>
+        <TextBlock Grid.Column="0" Text="на складе:" FontFamily="Comic Sans MS" VerticalAlignment="Top" Margin="10,193,242,0"/>
+        <Image Margin="14,222,305,-19" Source="/Images/Mozaika.png" Stretch="Fill"/>
+    </Grid>
+</Window>

@@ -1,0 +1,1283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище MozaikaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="material">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="materialTypesId" Type="int" />
+          <Property Name="pricePerOne" Type="int" />
+          <Property Name="packageAmount" Type="int" />
+          <Property Name="measurement" Type="nvarchar" MaxLength="10" />
+          <Property Name="supplierId" Type="int" />
+          <Property Name="scrapRate" Type="float" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="image" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="material_supplier">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="materialId" Type="int" />
+          <Property Name="supplierId" Type="int" />
+        </EntityType>
+        <EntityType Name="materialOrder">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supplierId" Type="int" />
+          <Property Name="workerId" Type="int" />
+          <Property Name="materialId" Type="int" />
+          <Property Name="stashId" Type="int" />
+        </EntityType>
+        <EntityType Name="materialStash">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stashId" Type="int" />
+          <Property Name="materialId" Type="int" />
+        </EntityType>
+        <EntityType Name="materialTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="materialId" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="lossPercent" Type="float" />
+        </EntityType>
+        <EntityType Name="order_item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="unit_price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="total_price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orderList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="materialOrderId" Type="int" />
+          <Property Name="materialId" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="totalPrice" Type="int" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <EntityType Name="partner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="organizationName" Type="nvarchar" MaxLength="50" />
+          <Property Name="inn" Type="nvarchar" MaxLength="50" />
+          <Property Name="directorFIO" Type="nvarchar" MaxLength="50" />
+          <Property Name="telNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="logo" Type="nvarchar" MaxLength="255" />
+          <Property Name="ratingId" Type="int" />
+          <Property Name="sellingPlaces" Type="nvarchar" MaxLength="100" />
+          <Property Name="rating" Type="int" />
+        </EntityType>
+        <EntityType Name="partner_order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="partner_id" Type="int" Nullable="false" />
+          <Property Name="order_date" Type="datetime" Nullable="false" />
+          <Property Name="total_amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="created_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productTypeId" Type="int" />
+          <Property Name="packageSize" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="article" Type="nvarchar" MaxLength="50" />
+          <Property Name="desccription" Type="nvarchar" MaxLength="255" />
+          <Property Name="image" Type="nvarchar" MaxLength="255" />
+          <Property Name="minCostForPartner" Type="money" />
+          <Property Name="weightWithoutPackage" Type="int" />
+          <Property Name="weightWithPackage" Type="int" />
+          <Property Name="qualityCertificate" Type="nvarchar" MaxLength="50" />
+          <Property Name="standartNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="costChange" Type="int" />
+          <Property Name="selfCost" Type="int" />
+          <Property Name="price" Type="int" />
+          <Property Name="materialId" Type="int" />
+        </EntityType>
+        <EntityType Name="productType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="coefficient" Type="float" />
+        </EntityType>
+        <EntityType Name="rating">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="partnerId" Type="int" />
+          <Property Name="timePeriod" Type="nvarchar" MaxLength="100" />
+          <Property Name="rating" Type="int" />
+        </EntityType>
+        <EntityType Name="stash">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="location" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="stash_material">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stashId" Type="int" />
+          <Property Name="materialId" Type="int" />
+          <Property Name="minStashAmount" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="scraped" Type="int" />
+          <Property Name="given" Type="int" />
+          <Property Name="reserved" Type="int" />
+          <Property Name="recieved" Type="int" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supplierName" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplierType" Type="nvarchar" MaxLength="50" />
+          <Property Name="inn" Type="nvarchar" MaxLength="50" />
+          <Property Name="rating" Type="int" />
+          <Property Name="startDealingDate" Type="date" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__order_ite__order__76969D2E">
+          <End Role="partner_order" Type="Self.partner_order" Multiplicity="1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partner_order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_ite__produ__778AC167">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__partner_o__partn__6FE99F9F">
+          <End Role="partner" Type="Self.partner" Multiplicity="1" />
+          <End Role="partner_order" Type="Self.partner_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="partner_order">
+              <PropertyRef Name="partner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_material_materialTypes">
+          <End Role="materialTypes" Type="Self.materialTypes" Multiplicity="0..1" />
+          <End Role="material" Type="Self.material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="material">
+              <PropertyRef Name="materialTypesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialOrder_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="materialOrder" Type="Self.materialOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialOrder">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialOrder_stash">
+          <End Role="stash" Type="Self.stash" Multiplicity="0..1" />
+          <End Role="materialOrder" Type="Self.materialOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stash">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialOrder">
+              <PropertyRef Name="stashId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialOrder_supplier">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="materialOrder" Type="Self.materialOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialOrder">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialStash_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="materialStash" Type="Self.materialStash" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialStash">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialStash_stash">
+          <End Role="stash" Type="Self.stash" Multiplicity="0..1" />
+          <End Role="materialStash" Type="Self.materialStash" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stash">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialStash">
+              <PropertyRef Name="stashId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialSupplier_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="material_supplier" Type="Self.material_supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="material_supplier">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialSupplier_supplier">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="material_supplier" Type="Self.material_supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="material_supplier">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderList_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="orderList" Type="Self.orderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderList">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderList_material1">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="orderList" Type="Self.orderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderList">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderList_materialOrder">
+          <End Role="materialOrder" Type="Self.materialOrder" Multiplicity="0..1" />
+          <End Role="orderList" Type="Self.orderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialOrder">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderList">
+              <PropertyRef Name="materialOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_productType">
+          <End Role="productType" Type="Self.productType" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="productTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rating_partner">
+          <End Role="partner" Type="Self.partner" Multiplicity="0..1" />
+          <End Role="rating" Type="Self.rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rating">
+              <PropertyRef Name="partnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stash_material_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="stash_material" Type="Self.stash_material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stash_material">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stash_material_stash">
+          <End Role="stash" Type="Self.stash" Multiplicity="0..1" />
+          <End Role="stash_material" Type="Self.stash_material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stash">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stash_material">
+              <PropertyRef Name="stashId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище MozaikaModelContainer">
+          <EntitySet Name="material" EntityType="Self.material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="material_supplier" EntityType="Self.material_supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materialOrder" EntityType="Self.materialOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materialStash" EntityType="Self.materialStash" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materialTypes" EntityType="Self.materialTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_item" EntityType="Self.order_item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orderList" EntityType="Self.orderList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="partner" EntityType="Self.partner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="partner_order" EntityType="Self.partner_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productType" EntityType="Self.productType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rating" EntityType="Self.rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stash" EntityType="Self.stash" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stash_material" EntityType="Self.stash_material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__order_ite__order__76969D2E" Association="Self.FK__order_ite__order__76969D2E">
+            <End Role="partner_order" EntitySet="partner_order" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_ite__produ__778AC167" Association="Self.FK__order_ite__produ__778AC167">
+            <End Role="product" EntitySet="product" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__partner_o__partn__6FE99F9F" Association="Self.FK__partner_o__partn__6FE99F9F">
+            <End Role="partner" EntitySet="partner" />
+            <End Role="partner_order" EntitySet="partner_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_material_materialTypes" Association="Self.FK_material_materialTypes">
+            <End Role="materialTypes" EntitySet="materialTypes" />
+            <End Role="material" EntitySet="material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialOrder_material" Association="Self.FK_materialOrder_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="materialOrder" EntitySet="materialOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialOrder_stash" Association="Self.FK_materialOrder_stash">
+            <End Role="stash" EntitySet="stash" />
+            <End Role="materialOrder" EntitySet="materialOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialOrder_supplier" Association="Self.FK_materialOrder_supplier">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="materialOrder" EntitySet="materialOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialStash_material" Association="Self.FK_materialStash_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="materialStash" EntitySet="materialStash" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialStash_stash" Association="Self.FK_materialStash_stash">
+            <End Role="stash" EntitySet="stash" />
+            <End Role="materialStash" EntitySet="materialStash" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialSupplier_material" Association="Self.FK_materialSupplier_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="material_supplier" EntitySet="material_supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialSupplier_supplier" Association="Self.FK_materialSupplier_supplier">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="material_supplier" EntitySet="material_supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderList_material" Association="Self.FK_orderList_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="orderList" EntitySet="orderList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderList_material1" Association="Self.FK_orderList_material1">
+            <End Role="material" EntitySet="material" />
+            <End Role="orderList" EntitySet="orderList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderList_materialOrder" Association="Self.FK_orderList_materialOrder">
+            <End Role="materialOrder" EntitySet="materialOrder" />
+            <End Role="orderList" EntitySet="orderList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_material" Association="Self.FK_product_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_productType" Association="Self.FK_product_productType">
+            <End Role="productType" EntitySet="productType" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rating_partner" Association="Self.FK_rating_partner">
+            <End Role="partner" EntitySet="partner" />
+            <End Role="rating" EntitySet="rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stash_material_material" Association="Self.FK_stash_material_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="stash_material" EntitySet="stash_material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stash_material_stash" Association="Self.FK_stash_material_stash">
+            <End Role="stash" EntitySet="stash" />
+            <End Role="stash_material" EntitySet="stash_material" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MozaikaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="material">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="materialTypesId" Type="Int32" />
+          <Property Name="pricePerOne" Type="Int32" />
+          <Property Name="packageAmount" Type="Int32" />
+          <Property Name="measurement" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="supplierId" Type="Int32" />
+          <Property Name="scrapRate" Type="Double" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="materialTypes" Relationship="Self.FK_material_materialTypes" FromRole="material" ToRole="materialTypes" />
+          <NavigationProperty Name="materialOrder" Relationship="Self.FK_materialOrder_material" FromRole="material" ToRole="materialOrder" />
+          <NavigationProperty Name="materialStash" Relationship="Self.FK_materialStash_material" FromRole="material" ToRole="materialStash" />
+          <NavigationProperty Name="material_supplier" Relationship="Self.FK_materialSupplier_material" FromRole="material" ToRole="material_supplier" />
+          <NavigationProperty Name="orderList" Relationship="Self.FK_orderList_material" FromRole="material" ToRole="orderList" />
+          <NavigationProperty Name="orderList1" Relationship="Self.FK_orderList_material1" FromRole="material" ToRole="orderList" />
+          <NavigationProperty Name="product" Relationship="Self.FK_product_material" FromRole="material" ToRole="product" />
+          <NavigationProperty Name="stash_material" Relationship="Self.FK_stash_material_material" FromRole="material" ToRole="stash_material" />
+        </EntityType>
+        <EntityType Name="material_supplier">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="materialId" Type="Int32" />
+          <Property Name="supplierId" Type="Int32" />
+          <NavigationProperty Name="material" Relationship="Self.FK_materialSupplier_material" FromRole="material_supplier" ToRole="material" />
+          <NavigationProperty Name="supplier" Relationship="Self.FK_materialSupplier_supplier" FromRole="material_supplier" ToRole="supplier" />
+        </EntityType>
+        <EntityType Name="materialOrder">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supplierId" Type="Int32" />
+          <Property Name="workerId" Type="Int32" />
+          <Property Name="materialId" Type="Int32" />
+          <Property Name="stashId" Type="Int32" />
+          <NavigationProperty Name="material" Relationship="Self.FK_materialOrder_material" FromRole="materialOrder" ToRole="material" />
+          <NavigationProperty Name="stash" Relationship="Self.FK_materialOrder_stash" FromRole="materialOrder" ToRole="stash" />
+          <NavigationProperty Name="supplier" Relationship="Self.FK_materialOrder_supplier" FromRole="materialOrder" ToRole="supplier" />
+          <NavigationProperty Name="orderList" Relationship="Self.FK_orderList_materialOrder" FromRole="materialOrder" ToRole="orderList" />
+        </EntityType>
+        <EntityType Name="materialStash">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stashId" Type="Int32" />
+          <Property Name="materialId" Type="Int32" />
+          <NavigationProperty Name="material" Relationship="Self.FK_materialStash_material" FromRole="materialStash" ToRole="material" />
+          <NavigationProperty Name="stash" Relationship="Self.FK_materialStash_stash" FromRole="materialStash" ToRole="stash" />
+        </EntityType>
+        <EntityType Name="materialTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="materialId" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lossPercent" Type="Double" />
+          <NavigationProperty Name="material" Relationship="Self.FK_material_materialTypes" FromRole="materialTypes" ToRole="material" />
+        </EntityType>
+        <EntityType Name="order_item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="unit_price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="total_price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="partner_order" Relationship="Self.FK__order_ite__order__76969D2E" FromRole="order_item" ToRole="partner_order" />
+          <NavigationProperty Name="product" Relationship="Self.FK__order_ite__produ__778AC167" FromRole="order_item" ToRole="product" />
+        </EntityType>
+        <EntityType Name="orderList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="materialOrderId" Type="Int32" />
+          <Property Name="materialId" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="totalPrice" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="material" Relationship="Self.FK_orderList_material" FromRole="orderList" ToRole="material" />
+          <NavigationProperty Name="material1" Relationship="Self.FK_orderList_material1" FromRole="orderList" ToRole="material" />
+          <NavigationProperty Name="materialOrder" Relationship="Self.FK_orderList_materialOrder" FromRole="orderList" ToRole="materialOrder" />
+        </EntityType>
+        <EntityType Name="partner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="organizationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="inn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="directorFIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ratingId" Type="Int32" />
+          <Property Name="sellingPlaces" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="rating" Type="Int32" />
+          <NavigationProperty Name="partner_order" Relationship="Self.FK__partner_o__partn__6FE99F9F" FromRole="partner" ToRole="partner_order" />
+          <NavigationProperty Name="rating1" Relationship="Self.FK_rating_partner" FromRole="partner" ToRole="rating" />
+        </EntityType>
+        <EntityType Name="partner_order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="partner_id" Type="Int32" Nullable="false" />
+          <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="total_amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="created_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="order_item" Relationship="Self.FK__order_ite__order__76969D2E" FromRole="partner_order" ToRole="order_item" />
+          <NavigationProperty Name="partner" Relationship="Self.FK__partner_o__partn__6FE99F9F" FromRole="partner_order" ToRole="partner" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productTypeId" Type="Int32" />
+          <Property Name="packageSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="article" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="desccription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="minCostForPartner" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="weightWithoutPackage" Type="Int32" />
+          <Property Name="weightWithPackage" Type="Int32" />
+          <Property Name="qualityCertificate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="standartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="costChange" Type="Int32" />
+          <Property Name="selfCost" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="materialId" Type="Int32" />
+          <NavigationProperty Name="material" Relationship="Self.FK_product_material" FromRole="product" ToRole="material" />
+          <NavigationProperty Name="order_item" Relationship="Self.FK__order_ite__produ__778AC167" FromRole="product" ToRole="order_item" />
+          <NavigationProperty Name="productType" Relationship="Self.FK_product_productType" FromRole="product" ToRole="productType" />
+        </EntityType>
+        <EntityType Name="productType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="coefficient" Type="Double" />
+          <NavigationProperty Name="product" Relationship="Self.FK_product_productType" FromRole="productType" ToRole="product" />
+        </EntityType>
+        <EntityType Name="rating">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="partnerId" Type="Int32" />
+          <Property Name="timePeriod" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="rating1" Type="Int32" />
+          <NavigationProperty Name="partner" Relationship="Self.FK_rating_partner" FromRole="rating" ToRole="partner" />
+        </EntityType>
+        <EntityType Name="stash">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="materialOrder" Relationship="Self.FK_materialOrder_stash" FromRole="stash" ToRole="materialOrder" />
+          <NavigationProperty Name="materialStash" Relationship="Self.FK_materialStash_stash" FromRole="stash" ToRole="materialStash" />
+          <NavigationProperty Name="stash_material" Relationship="Self.FK_stash_material_stash" FromRole="stash" ToRole="stash_material" />
+        </EntityType>
+        <EntityType Name="stash_material">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stashId" Type="Int32" />
+          <Property Name="materialId" Type="Int32" />
+          <Property Name="minStashAmount" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="scraped" Type="Int32" />
+          <Property Name="given" Type="Int32" />
+          <Property Name="reserved" Type="Int32" />
+          <Property Name="recieved" Type="Int32" />
+          <NavigationProperty Name="material" Relationship="Self.FK_stash_material_material" FromRole="stash_material" ToRole="material" />
+          <NavigationProperty Name="stash" Relationship="Self.FK_stash_material_stash" FromRole="stash_material" ToRole="stash" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplierType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="inn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rating" Type="Int32" />
+          <Property Name="startDealingDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="material_supplier" Relationship="Self.FK_materialSupplier_supplier" FromRole="supplier" ToRole="material_supplier" />
+          <NavigationProperty Name="materialOrder" Relationship="Self.FK_materialOrder_supplier" FromRole="supplier" ToRole="materialOrder" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_material_materialTypes">
+          <End Role="materialTypes" Type="Self.materialTypes" Multiplicity="0..1" />
+          <End Role="material" Type="Self.material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="material">
+              <PropertyRef Name="materialTypesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialOrder_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="materialOrder" Type="Self.materialOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialOrder">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialStash_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="materialStash" Type="Self.materialStash" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialStash">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialSupplier_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="material_supplier" Type="Self.material_supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="material_supplier">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderList_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="orderList" Type="Self.orderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderList">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderList_material1">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="orderList" Type="Self.orderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderList">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stash_material_material">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="stash_material" Type="Self.stash_material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stash_material">
+              <PropertyRef Name="materialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialSupplier_supplier">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="material_supplier" Type="Self.material_supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="material_supplier">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialOrder_stash">
+          <End Role="stash" Type="Self.stash" Multiplicity="0..1" />
+          <End Role="materialOrder" Type="Self.materialOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stash">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialOrder">
+              <PropertyRef Name="stashId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialOrder_supplier">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="materialOrder" Type="Self.materialOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialOrder">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderList_materialOrder">
+          <End Role="materialOrder" Type="Self.materialOrder" Multiplicity="0..1" />
+          <End Role="orderList" Type="Self.orderList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialOrder">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderList">
+              <PropertyRef Name="materialOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_materialStash_stash">
+          <End Role="stash" Type="Self.stash" Multiplicity="0..1" />
+          <End Role="materialStash" Type="Self.materialStash" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stash">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materialStash">
+              <PropertyRef Name="stashId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_ite__order__76969D2E">
+          <End Role="partner_order" Type="Self.partner_order" Multiplicity="1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partner_order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_ite__produ__778AC167">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__partner_o__partn__6FE99F9F">
+          <End Role="partner" Type="Self.partner" Multiplicity="1" />
+          <End Role="partner_order" Type="Self.partner_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="partner_order">
+              <PropertyRef Name="partner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rating_partner">
+          <End Role="partner" Type="Self.partner" Multiplicity="0..1" />
+          <End Role="rating" Type="Self.rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rating">
+              <PropertyRef Name="partnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_productType">
+          <End Role="productType" Type="Self.productType" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="productTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stash_material_stash">
+          <End Role="stash" Type="Self.stash" Multiplicity="0..1" />
+          <End Role="stash_material" Type="Self.stash_material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stash">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stash_material">
+              <PropertyRef Name="stashId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MozaikaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="material" EntityType="Self.material" />
+          <EntitySet Name="material_supplier" EntityType="Self.material_supplier" />
+          <EntitySet Name="materialOrder" EntityType="Self.materialOrder" />
+          <EntitySet Name="materialStash" EntityType="Self.materialStash" />
+          <EntitySet Name="materialTypes" EntityType="Self.materialTypes" />
+          <EntitySet Name="order_item" EntityType="Self.order_item" />
+          <EntitySet Name="orderList" EntityType="Self.orderList" />
+          <EntitySet Name="partner" EntityType="Self.partner" />
+          <EntitySet Name="partner_order" EntityType="Self.partner_order" />
+          <EntitySet Name="product" EntityType="Self.product" />
+          <EntitySet Name="productType" EntityType="Self.productType" />
+          <EntitySet Name="rating" EntityType="Self.rating" />
+          <EntitySet Name="stash" EntityType="Self.stash" />
+          <EntitySet Name="stash_material" EntityType="Self.stash_material" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_material_materialTypes" Association="Self.FK_material_materialTypes">
+            <End Role="materialTypes" EntitySet="materialTypes" />
+            <End Role="material" EntitySet="material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialOrder_material" Association="Self.FK_materialOrder_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="materialOrder" EntitySet="materialOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialStash_material" Association="Self.FK_materialStash_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="materialStash" EntitySet="materialStash" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialSupplier_material" Association="Self.FK_materialSupplier_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="material_supplier" EntitySet="material_supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderList_material" Association="Self.FK_orderList_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="orderList" EntitySet="orderList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderList_material1" Association="Self.FK_orderList_material1">
+            <End Role="material" EntitySet="material" />
+            <End Role="orderList" EntitySet="orderList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_material" Association="Self.FK_product_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stash_material_material" Association="Self.FK_stash_material_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="stash_material" EntitySet="stash_material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialSupplier_supplier" Association="Self.FK_materialSupplier_supplier">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="material_supplier" EntitySet="material_supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialOrder_stash" Association="Self.FK_materialOrder_stash">
+            <End Role="stash" EntitySet="stash" />
+            <End Role="materialOrder" EntitySet="materialOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialOrder_supplier" Association="Self.FK_materialOrder_supplier">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="materialOrder" EntitySet="materialOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderList_materialOrder" Association="Self.FK_orderList_materialOrder">
+            <End Role="materialOrder" EntitySet="materialOrder" />
+            <End Role="orderList" EntitySet="orderList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_materialStash_stash" Association="Self.FK_materialStash_stash">
+            <End Role="stash" EntitySet="stash" />
+            <End Role="materialStash" EntitySet="materialStash" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_ite__order__76969D2E" Association="Self.FK__order_ite__order__76969D2E">
+            <End Role="partner_order" EntitySet="partner_order" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_ite__produ__778AC167" Association="Self.FK__order_ite__produ__778AC167">
+            <End Role="product" EntitySet="product" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__partner_o__partn__6FE99F9F" Association="Self.FK__partner_o__partn__6FE99F9F">
+            <End Role="partner" EntitySet="partner" />
+            <End Role="partner_order" EntitySet="partner_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rating_partner" Association="Self.FK_rating_partner">
+            <End Role="partner" EntitySet="partner" />
+            <End Role="rating" EntitySet="rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_productType" Association="Self.FK_product_productType">
+            <End Role="productType" EntitySet="productType" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stash_material_stash" Association="Self.FK_stash_material_stash">
+            <End Role="stash" EntitySet="stash" />
+            <End Role="stash_material" EntitySet="stash_material" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MozaikaModelContainer" CdmEntityContainer="MozaikaEntities">
+          <EntitySetMapping Name="material">
+            <EntityTypeMapping TypeName="MozaikaModel.material">
+              <MappingFragment StoreEntitySet="material">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="materialTypesId" ColumnName="materialTypesId" />
+                <ScalarProperty Name="pricePerOne" ColumnName="pricePerOne" />
+                <ScalarProperty Name="packageAmount" ColumnName="packageAmount" />
+                <ScalarProperty Name="measurement" ColumnName="measurement" />
+                <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+                <ScalarProperty Name="scrapRate" ColumnName="scrapRate" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="material_supplier">
+            <EntityTypeMapping TypeName="MozaikaModel.material_supplier">
+              <MappingFragment StoreEntitySet="material_supplier">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="materialId" ColumnName="materialId" />
+                <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materialOrder">
+            <EntityTypeMapping TypeName="MozaikaModel.materialOrder">
+              <MappingFragment StoreEntitySet="materialOrder">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+                <ScalarProperty Name="workerId" ColumnName="workerId" />
+                <ScalarProperty Name="materialId" ColumnName="materialId" />
+                <ScalarProperty Name="stashId" ColumnName="stashId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materialStash">
+            <EntityTypeMapping TypeName="MozaikaModel.materialStash">
+              <MappingFragment StoreEntitySet="materialStash">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="stashId" ColumnName="stashId" />
+                <ScalarProperty Name="materialId" ColumnName="materialId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materialTypes">
+            <EntityTypeMapping TypeName="MozaikaModel.materialTypes">
+              <MappingFragment StoreEntitySet="materialTypes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="materialId" ColumnName="materialId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lossPercent" ColumnName="lossPercent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_item">
+            <EntityTypeMapping TypeName="MozaikaModel.order_item">
+              <MappingFragment StoreEntitySet="order_item">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderList">
+            <EntityTypeMapping TypeName="MozaikaModel.orderList">
+              <MappingFragment StoreEntitySet="orderList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="materialOrderId" ColumnName="materialOrderId" />
+                <ScalarProperty Name="materialId" ColumnName="materialId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="partner">
+            <EntityTypeMapping TypeName="MozaikaModel.partner">
+              <MappingFragment StoreEntitySet="partner">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="organizationName" ColumnName="organizationName" />
+                <ScalarProperty Name="inn" ColumnName="inn" />
+                <ScalarProperty Name="directorFIO" ColumnName="directorFIO" />
+                <ScalarProperty Name="telNumber" ColumnName="telNumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="ratingId" ColumnName="ratingId" />
+                <ScalarProperty Name="sellingPlaces" ColumnName="sellingPlaces" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="partner_order">
+            <EntityTypeMapping TypeName="MozaikaModel.partner_order">
+              <MappingFragment StoreEntitySet="partner_order">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="partner_id" ColumnName="partner_id" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product">
+            <EntityTypeMapping TypeName="MozaikaModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="productTypeId" ColumnName="productTypeId" />
+                <ScalarProperty Name="packageSize" ColumnName="packageSize" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="article" ColumnName="article" />
+                <ScalarProperty Name="desccription" ColumnName="desccription" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="minCostForPartner" ColumnName="minCostForPartner" />
+                <ScalarProperty Name="weightWithoutPackage" ColumnName="weightWithoutPackage" />
+                <ScalarProperty Name="weightWithPackage" ColumnName="weightWithPackage" />
+                <ScalarProperty Name="qualityCertificate" ColumnName="qualityCertificate" />
+                <ScalarProperty Name="standartNumber" ColumnName="standartNumber" />
+                <ScalarProperty Name="costChange" ColumnName="costChange" />
+                <ScalarProperty Name="selfCost" ColumnName="selfCost" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="materialId" ColumnName="materialId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productType">
+            <EntityTypeMapping TypeName="MozaikaModel.productType">
+              <MappingFragment StoreEntitySet="productType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="coefficient" ColumnName="coefficient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rating">
+            <EntityTypeMapping TypeName="MozaikaModel.rating">
+              <MappingFragment StoreEntitySet="rating">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="partnerId" ColumnName="partnerId" />
+                <ScalarProperty Name="timePeriod" ColumnName="timePeriod" />
+                <ScalarProperty Name="rating1" ColumnName="rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stash">
+            <EntityTypeMapping TypeName="MozaikaModel.stash">
+              <MappingFragment StoreEntitySet="stash">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="location" ColumnName="location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stash_material">
+            <EntityTypeMapping TypeName="MozaikaModel.stash_material">
+              <MappingFragment StoreEntitySet="stash_material">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="stashId" ColumnName="stashId" />
+                <ScalarProperty Name="materialId" ColumnName="materialId" />
+                <ScalarProperty Name="minStashAmount" ColumnName="minStashAmount" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="scraped" ColumnName="scraped" />
+                <ScalarProperty Name="given" ColumnName="given" />
+                <ScalarProperty Name="reserved" ColumnName="reserved" />
+                <ScalarProperty Name="recieved" ColumnName="recieved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supplier">
+            <EntityTypeMapping TypeName="MozaikaModel.supplier">
+              <MappingFragment StoreEntitySet="supplier">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="supplierName" ColumnName="supplierName" />
+                <ScalarProperty Name="supplierType" ColumnName="supplierType" />
+                <ScalarProperty Name="inn" ColumnName="inn" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="startDealingDate" ColumnName="startDealingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MozaikaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

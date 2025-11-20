@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc66e76a98754151afe166f1232b172e" Name="Diagram1">
+        <EntityTypeShape EntityType="MozaikaModel.material" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.material_supplier" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.materialOrder" Width="1.5" PointX="8.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.materialStash" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.materialTypes" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.order_item" Width="1.5" PointX="7.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.orderList" Width="1.5" PointX="10.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.partner" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.partner_order" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.product" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.productType" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.rating" Width="1.5" PointX="5.25" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.stash" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.stash_material" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.supplier" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MozaikaModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <AssociationConnector Association="MozaikaModel.FK_material_materialTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_materialOrder_material" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_materialStash_material" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_materialSupplier_material" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_orderList_material" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_orderList_material1" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_product_material" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_stash_material_material" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_materialSupplier_supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_materialOrder_stash" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_materialOrder_supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_orderList_materialOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_materialStash_stash" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK__order_ite__order__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK__order_ite__produ__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK__partner_o__partn__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_rating_partner" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_product_productType" ManuallyRouted="false" />
+        <AssociationConnector Association="MozaikaModel.FK_stash_material_stash" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

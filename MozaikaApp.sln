@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MozaikaApp", "MozaikaApp.csproj", "{FDCC87BE-43CB-4F54-9DD9-80D9FD71E800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation_LIB", "..\Validation_LIB\Mail_LIB\Validation_LIB.csproj", "{B2583D90-5864-440D-9D0B-1162B1393BA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDCC87BE-43CB-4F54-9DD9-80D9FD71E800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDCC87BE-43CB-4F54-9DD9-80D9FD71E800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDCC87BE-43CB-4F54-9DD9-80D9FD71E800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDCC87BE-43CB-4F54-9DD9-80D9FD71E800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2583D90-5864-440D-9D0B-1162B1393BA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2583D90-5864-440D-9D0B-1162B1393BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2583D90-5864-440D-9D0B-1162B1393BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2583D90-5864-440D-9D0B-1162B1393BA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0C8488B-A576-4EE4-8DF4-6E06E42464D9}
+	EndGlobalSection
+EndGlobal
