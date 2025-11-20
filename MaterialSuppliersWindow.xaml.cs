@@ -17,7 +17,6 @@ namespace MozaikaApp
 
         private void LoadSuppliers()
         {
-            // Пример: таблицы suppliers и materialSuppliers должны существовать
             var suppliers = from ms in db.material_supplier
                             join s in db.supplier on ms.supplierId equals s.id
                             where ms.materialId == materialId
@@ -40,7 +39,7 @@ namespace MozaikaApp
         {
             // Открываем окно калькулятора и передаём materialId
             var calcWin = new ProductionCalculatorPanel(this.materialId);
-            calcWin.Owner = this; // чтобы окно знало родителя
+            calcWin.Owner = this;
             calcWin.ShowDialog();
         }
 
