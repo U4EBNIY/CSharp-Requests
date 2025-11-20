@@ -9,7 +9,7 @@ namespace MozaikaApp
     public partial class AddMaterialPanel : Window
     {
         private MozaikaEntities db = new MozaikaEntities();
-        private int? editingMaterialId = null; // если null — добавление, иначе - редактирование
+        private int? editingMaterialId = null; 
 
         public AddMaterialPanel()
         {
@@ -95,7 +95,6 @@ namespace MozaikaApp
 
                 if (editingMaterialId.HasValue)
                 {
-                    // редактируем
                     mat = db.material.Find(editingMaterialId.Value);
                     mat.name = name;
                     mat.pricePerOne = (int)cost;
@@ -111,7 +110,6 @@ namespace MozaikaApp
                 }
                 else
                 {
-                    // добавляем новый
                     mat = new material
                     {
                         name = name,
@@ -121,7 +119,7 @@ namespace MozaikaApp
                         image = "noImage.png"
                     };
                     db.material.Add(mat);
-                    db.SaveChanges(); // сохраняем, чтобы получить ID
+                    db.SaveChanges();
 
                     stashMat = new stash_material
                     {
